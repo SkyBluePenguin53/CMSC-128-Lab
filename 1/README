@@ -1,0 +1,16 @@
+INTERART GALLERY WEB APPLICATION WITH LOGIN/REGISTER SYSTEM
+
+BY RON GERLAN F. NARAGDAO
+
+For CMSC 128 Laboratory.
+
+September 2022.
+
+This web application is the continuation of CMSC 126 Sprint Lab
+with the following updates:
+  1. Enhanced Login/Register system
+  2. home, blogs, and account page is acccessible after login
+
+NOTE: 
+The post system is under construction.
+However, the user system is fully functional!
