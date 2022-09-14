@@ -11,28 +11,27 @@ class SessionExpired
 {
     public function handle($request, Closure $next)
     {
-
-        //If session does not exist
-        if (! session()->has('lastActivityTime')) 
+        //
+        if(Session::has('loginId'))
         {
+            //If session time exceeds 1 minute.
+            if (now()->diffInMinutes(session('lastActivityTime'))>=(5)) // also you can this value in your config file and use here
+            {  
+                //Forget time data.
+                session()->forget('lastActivityTime');
+
+                //Pull ID and auth logout for optional.
+                Session::pull('loginId');
+                auth()->logout();
+        
+                //View logout page with status auto that stands for automatic logout.
+                return redirect('/home/expiredsession');
+            }
+            //Tracks the time
             session(['lastActivityTime' => now()]);
         }
 
-        //If session time exceeds 1 minute.
-        elseif (now()->diffInMinutes(session('lastActivityTime')) >= (5) ) // also you can this value in your config file and use here
-        {  
-            //Forget time data.
-            session()->forget('lastActivityTime');
-
-            //Pull ID and auth logout for optional.
-            Session::pull('loginId');
-            auth()->logout();
-     
-            //View logout page with status auto that stands for automatic logout.
-            return redirect('/home/expiredsession');
-        }
-        session(['lastActivityTime' => now()]);
-
+        //Passes request to next handler or proceeds user to certain urls mentioned above.
         return $next($request);
     }
 }
