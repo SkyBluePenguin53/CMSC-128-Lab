@@ -14,7 +14,7 @@ class SessionExpired
         //
         if(Session::has('loginId'))
         {
-            //If session time exceeds 1 minute.
+            //If session time exceeds 5 minutes.
             if (now()->diffInMinutes(session('lastActivityTime'))>=(5)) // also you can this value in your config file and use here
             {  
                 //Forget time data.
