@@ -53,7 +53,8 @@ class AccountController extends Controller
         */
         $request->validate([
             'penname'=>'required|unique:account',
-            'password'=>'required|min:8|regex:/^(?=.*\W)(?=.*[A-Z])(?=.*[0-9]).*$/'
+            'password'=>'required|min:8|regex:/^(?=.+\W)(?=.*[A-Z])(?=.+[0-9]).+$/'
+            //Positive lookahead (?=) matches group after main expression without incuding it in result.
         ]);
 
         //Creates new model for penname and hashed password.
